@@ -1,0 +1,30 @@
+{
+  "name": "vinyl-commonjs-wrap",
+  "description": "",
+  "author": "Whitebolt <hello@whitebolt.net>",
+  "contributors": [
+    {
+      "name": "Stephen Simpson",
+      "email": "stephen@whitebolt.net"
+    },
+    {
+      "name": "Kristjan Allikas",
+      "email": "kris@whitebolt.net"
+    }
+  ],
+  "version": "0.0.1",
+  "private": true,
+  "keywords": [
+    "gulpfriendly",
+    "gulp",
+    "cjs"
+  ],
+  "dependencies": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@aaron.whitebolt:simpo/gulp-commonjs-browser-wrap.git"
+  },
+  "license": "MIT",
+  "devDependencies": {}
+}
