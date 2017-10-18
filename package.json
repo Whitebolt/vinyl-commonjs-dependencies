@@ -20,14 +20,7 @@
     "cjs"
   ],
   "dependencies": {
-    "event-stream": "^3.3.4",
-    "from2-array": "^0.0.4",
-    "glob": "^7.1.2",
-    "minimatch": "^3.0.4",
-    "stream": "^0.0.2",
-    "stream-array": "^1.1.2",
-    "through2": "^2.0.3",
-    "to-through": "^2.0.0",
+    "vinyl": "^2.1.0",
     "vinyl-fs": "^2.4.4"
   },
   "repository": {
