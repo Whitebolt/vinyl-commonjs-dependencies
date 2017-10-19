@@ -12,14 +12,17 @@
       "email": "kris@whitebolt.net"
     }
   ],
-  "version": "0.1.1",
+  "version": "0.2.0",
   "private": true,
   "keywords": [
     "gulpfriendly",
     "gulp",
-    "cjs"
+    "cjs",
+    "vinyl"
   ],
   "dependencies": {
+    "async-resolve": "^0.3.5",
+    "detective": "^4.5.0",
     "through2": "^2.0.3",
     "vinyl": "^2.1.0",
     "vinyl-fs": "^2.4.4"
