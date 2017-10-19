@@ -12,7 +12,7 @@
       "email": "kris@whitebolt.net"
     }
   ],
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
   "keywords": [
     "gulpfriendly",
@@ -24,13 +24,15 @@
     "async-resolve": "^0.3.5",
     "detective": "^4.5.0",
     "through2": "^2.0.3",
-    "vinyl": "^2.1.0",
-    "vinyl-fs": "^2.4.4"
+    "vinyl": "^2.1.0"
   },
   "repository": {
     "type": "git",
     "url": "git@aaron.whitebolt:simpo/gulp-commonjs-browser-wrap.git"
   },
   "license": "MIT",
-  "devDependencies": {}
+  "devDependencies": {},
+  "peerDependencies": {
+    "gulp": "^3.9.1"
+  }
 }
