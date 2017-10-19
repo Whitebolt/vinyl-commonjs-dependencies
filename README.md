@@ -38,7 +38,7 @@ gulp.task('build', ()=>vcjd.src(['./index.js'])
 );
 ```
 
-In the example above we have a basic build task in gulp.  Code is sourced from *./index.js* and it dependencies.  Files are concatenated together and the commonjs-browser-wrap module is used to create a browser wrapped version with no loader dependencies.
+In the example above we have a basic build task in gulp.  Code is sourced from *./index.js* and it dependencies.  Files are concatenated together and then [commonjs-browser-wrap](https://github.com/Whitebolt/gulp-commonjs-browser-wrap) is used to create a browser wrapped version with no loader dependencies.
 
 # vcjd.src(*globs* *[,options]*)
 
