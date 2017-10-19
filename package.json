@@ -12,7 +12,7 @@
       "email": "kris@whitebolt.net"
     }
   ],
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "keywords": [
     "gulpfriendly",
@@ -20,6 +20,7 @@
     "cjs"
   ],
   "dependencies": {
+    "through2": "^2.0.3",
     "vinyl": "^2.1.0",
     "vinyl-fs": "^2.4.4"
   },
