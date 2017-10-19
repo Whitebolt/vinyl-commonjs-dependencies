@@ -1,6 +1,6 @@
 {
-  "name": "vinyl-commonjs-tree",
-  "description": "",
+  "name": "vinyl-commonjs-dependencies",
+  "description": "A vinyl adaptor for for commonjs dependency trees. Get all files that a script depends on.",
   "author": "Whitebolt <hello@whitebolt.net>",
   "contributors": [
     {
@@ -8,13 +8,17 @@
       "email": "stephen@whitebolt.net"
     }
   ],
-  "version": "0.4.0",
+  "version": "0.5.0",
   "private": true,
   "keywords": [
     "gulpfriendly",
     "gulp",
-    "cjs",
-    "vinyl"
+    "common-js",
+    "vinyl",
+    "gulpfile",
+    "vinyl-adapter",
+    "streams",
+    "require"
   ],
   "dependencies": {
     "async-resolve": "^0.3.5",
@@ -24,8 +28,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@aaron.whitebolt:simpo/gulp-commonjs-browser-wrap.git"
+    "url": "git@github.com:Whitebolt/vinyl-commonjs-dependencies.git"
   },
+  "bugs": {
+    "url": "https://github.com/Whitebolt/vinyl-commonjs-dependencies/issues"
+  },
+  "homepage": "https://github.com/Whitebolt/vinyl-commonjs-dependencies#readme",
+  "engines": ">=8.0.0",
   "license": "MIT",
   "devDependencies": {},
   "peerDependencies": {
