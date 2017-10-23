@@ -8,7 +8,7 @@
       "email": "stephen@whitebolt.net"
     }
   ],
-  "version": "0.6.0",
+  "version": "0.7.0",
   "private": false,
   "keywords": [
     "gulpfriendly",
@@ -22,6 +22,7 @@
   ],
   "dependencies": {
     "async-resolve": "^0.3.5",
+    "babel-polyfill": "^6.26.0",
     "detective": "^4.5.0",
     "lodash-provider": "^1.0.1",
     "lodash.castarray": "^4.4.0",
@@ -38,10 +39,40 @@
     "url": "https://github.com/Whitebolt/vinyl-commonjs-dependencies/issues"
   },
   "homepage": "https://github.com/Whitebolt/vinyl-commonjs-dependencies#readme",
-  "engines": ">=8.0.0",
+  "engines": ">=4.0.0",
   "license": "MIT",
-  "devDependencies": {},
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-plugin-syntax-async-functions": "^6.13.0",
+    "babel-plugin-syntax-async-generators": "^6.13.0",
+    "babel-plugin-transform-async-generator-functions": "^6.24.1",
+    "babel-plugin-transform-es2015-spread": "^6.22.0",
+    "babel-plugin-transform-regenerator": "^6.26.0",
+    "babel-preset-env": "^1.6.0",
+    "gulp-babel": "^7.0.0"
+  },
   "peerDependencies": {
     "gulp": "^3.9.1"
+  },
+  "babel": {
+    "presets": [
+      [
+        "env",
+        {
+          "targets": {
+            "node": "4.0.0"
+          },
+          "include": [
+            "babel-plugin-transform-es2015-spread"
+          ]
+        }
+      ]
+    ],
+    "plugins": [
+      "syntax-async-functions",
+      "syntax-async-generators",
+      "transform-async-generator-functions",
+      "transform-regenerator"
+    ]
   }
 }
