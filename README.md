@@ -58,9 +58,10 @@ As well as supporting all the standard gulp.src() options; Vcjd also supports th
  |property | type | description |
  | --- | --- | --- |
  | gulp | *Gulp* | Used to pass a gulp instance into Vcjd.  This is useful if you need to pass a specific version into the adaptor to use for src() |
- | mapper | *Object* | A module lookup object.  You may want to override module names or locations.  This a direct mapping object, so keys are module-ids (or paths) and values are their overridden path / id |
+ | mapper | *Object* | A module lookup object.  You may want to override module names or locations.  This a direct mapping object, so keys are module-ids (or paths) and values are their overridden path / id.  If value of mapper property is set to null then given module will be skipped and not pulled into the stream.  If the value is set to true it will override any *internalOnly* settong for given module. |
  | lookup | *Map* | This is a map, which maps full-paths to vinyl files.  Used internally to cache loaded files and avoid reloading.  It could be used to pre-cache some files |
  | resolver | Object | Options object to be passed to [async-resolve](https://github.com/Meettya/async-resolve).  If not supplied then defaults are used, which are normally what is needed.
+ | internalOnly | boolean | If set then will only pull in local files rather than loading all requires (including modules from node_modules). |
  
  ### Example using mapper:
  
