@@ -8,7 +8,7 @@
       "email": "stephen@whitebolt.net"
     }
   ],
-  "version": "0.7.2",
+  "version": "0.7.3",
   "private": false,
   "keywords": [
     "gulpfriendly",
@@ -19,6 +19,11 @@
     "vinyl-adapter",
     "streams",
     "require"
+  ],
+  "files": [
+    "build/",
+    "yarn.lock",
+    "index.js"
   ],
   "dependencies": {
     "async-resolve": "^0.3.5",
