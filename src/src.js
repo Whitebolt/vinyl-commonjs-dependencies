@@ -72,7 +72,7 @@ async function resolveModule(moduleId, options, root=options.base) {
  * @param {VinylFile} file		File to get for.
  * @yield {string}				Dependency path
  */
-function* fileRequires(file) {
+function* fileRequires(file, options) {
 	try {
 		const requires = detective(file.contents.toString('utf8'));
 		for (let n=0; n<requires.length; n++) {
@@ -92,7 +92,7 @@ function* fileRequires(file) {
  * @returns {Array.<string>}	Dependency paths.
  */
 function getRequires(file, options) {
-	return [...fileRequires(file)].map(async (moduleId)=>{
+	return [...fileRequires(file, options)].map(async (moduleId)=>{
 		if (options.internalOnly && (moduleId.charAt(0) !== '.') && (moduleId.charAt(0) !== '/')) {
 			if (options.mapper[moduleId] !== true) return undefined;
 		}
@@ -184,10 +184,10 @@ function createResolver(options) {
 		const resolver = new Resolver(options.resolver?options.resolver:{});
 		resolver.resolve(moduleId, base, (err, absolutePath)=>{
 			if (err) {
-				if (options.debugVcjd) debug(`Could not resolve path to module: ${moduleId}\nFrom base: ${base}`);
+				if (options.debugVcjd) debug(`Could not resolve path to module: ${moduleId}\n\tfrom base: ${base}`);
 				return reject(err);
 			}
-			if (options.debugVcjd) debug(`Resolved module: ${moduleId}:\nFrom base: ${base}\n:Is: ${base}`);
+			if (options.debugVcjd) debug(`Resolved module: ${moduleId}:\n\tfrom base: ${base}\n\t:is: ${base}`);
 			return resolve(absolutePath);
 		});
 	})
@@ -201,16 +201,19 @@ function createResolver(options) {
  * @returns {Object}				Mutated options (defaults added).
  */
 function parseOptions(options={}, vinylCjsDeps) {
-	options.gulp = options.gulp || vinylCjsDeps.gulp || require('gulp');
-	options.base = options.base || options.cwd || process.cwd();
-	options.cwd = options.cwd || options.base;
-	options.mapper = options.mapper || {};
-	options.lookup = options.lookup || new Map();
-	options.resolver = createResolver(options);
-	options.internalOnly = options.internalOnly || false;
-	options.debugVcjd = options.debugVcjd || false;
+	const _options = Object.assign({
+		gulp: vinylCjsDeps.gulp || require('gulp'),
+		base: options.cwd || process.cwd(),
+		cwd: options.base || process.cwd(),
+		internalOnly: false,
+		debugVcjd: false
+	}, options);
 
-	return options;
+	_options.mapper = Object.assign({}, options.mapper || {});
+	_options.lookup = new Map(options.lookup || []);
+	_options.resolver = createResolver(options);
+
+	return _options;
 }
 
 function src(glob, options) {
