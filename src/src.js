@@ -35,6 +35,7 @@ async function getVinylFile(filePath, options) {
  */
 async function createVinylFile(filePath, options) {
 	options.lookup.set(filePath, vinylFile.read(filePath, options));
+	if (options.debugVcjd) debug(`Reading contents of: ${filePath}`);
 	return await options.lookup.get(filePath);
 }
 
@@ -74,7 +75,10 @@ async function resolveModule(moduleId, options, root=options.base) {
 function* fileRequires(file) {
 	try {
 		const requires = detective(file.contents.toString('utf8'));
-		for (let n=0; n<requires.length; n++) yield requires[n];
+		for (let n=0; n<requires.length; n++) {
+			if (options.debugVcjd) debug(`Found require for: ${requires[n]} in ${file.path}.`);
+			yield requires[n];
+		}
 	} catch(err) {
 
 	}
@@ -161,8 +165,12 @@ function srcFilePusher(options) {
 		getAllFiles(file, options).then(files=>{
 			files.forEach(file=>this.push(file));
 			done();
-		}, err=>console.error(file.path, err));
+		}, err=>{});
 	})
+}
+
+function debug(message) {
+	console.log(`Vinyl-CommonJs-Tree [DEBUG]: ${message}`);
 }
 
 /**
@@ -175,7 +183,11 @@ function createResolver(options) {
 	return (moduleId, base)=>new Promise((resolve, reject)=>{
 		const resolver = new Resolver(options.resolver?options.resolver:{});
 		resolver.resolve(moduleId, base, (err, absolutePath)=>{
-			if (err) return reject(err);
+			if (err) {
+				if (options.debugVcjd) debug(`Could not resolve path to module: ${moduleId}\nFrom base: ${base}`);
+				return reject(err);
+			}
+			if (options.debugVcjd) debug(`Resolved module: ${moduleId}:\nFrom base: ${base}\n:Is: ${base}`);
 			return resolve(absolutePath);
 		});
 	})
@@ -196,6 +208,7 @@ function parseOptions(options={}, vinylCjsDeps) {
 	options.lookup = options.lookup || new Map();
 	options.resolver = createResolver(options);
 	options.internalOnly = options.internalOnly || false;
+	options.debugVcjd = options.debugVcjd || false;
 
 	return options;
 }
