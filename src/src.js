@@ -34,9 +34,8 @@ async function getVinylFile(filePath, options) {
  * @returns  {VinylFile}		New vinyl-file object.
  */
 async function createVinylFile(filePath, options) {
-	const file = await vinylFile.read(filePath, options);
-	options.lookup.set(filePath, file);
-	return file;
+	options.lookup.set(filePath, vinylFile.read(filePath, options));
+	return await options.lookup.get(filePath);
 }
 
 /**
@@ -73,8 +72,12 @@ async function resolveModule(moduleId, options, root=options.base) {
  * @yield {string}				Dependency path
  */
 function* fileRequires(file) {
-	const requires = detective(file.contents.toString('utf8'));
-	for (let n=0; n<requires.length; n++) yield requires[n];
+	try {
+		const requires = detective(file.contents.toString('utf8'));
+		for (let n=0; n<requires.length; n++) yield requires[n];
+	} catch(err) {
+
+	}
 }
 
 /**
